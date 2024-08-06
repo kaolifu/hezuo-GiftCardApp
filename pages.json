@@ -1,0 +1,63 @@
+{
+  "pages": [{
+    "path": "pages/farm/farm",
+    "style": {}
+  }, {
+    "path": "pages/cards/cards",
+    "style": {}
+  }, {
+    "path": "pages/scan/scan",
+    "style": {}
+  }, {
+    "path": "pages/order/order",
+    "style": {}
+  }, {
+    "path": "pages/my/my",
+    "style": {}
+  },
+  {
+    "path" : "subpkg/cardlink/cardlink",
+    "style" : 
+    {
+      "navigationBarTitleText" : "绑定卡片"
+    }
+  }],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "禾作计划礼品卡服务系统",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "app-plus": {
+      "background": "#efeff4"
+    }
+  },
+  "tabBar": {
+    "selectedColor": "#1AAD19",
+    "list": [{
+      "pagePath": "pages/farm/farm",
+      "text": "禾作农场",
+      "iconPath": "static/tab_icons/farm.png",
+      "selectedIconPath": "static/tab_icons/farm-active.png"
+    }, {
+      "pagePath": "pages/cards/cards",
+      "text": "卡片管理", 
+      "iconPath": "static/tab_icons/cards.png",
+      "selectedIconPath": "static/tab_icons/cards-active.png"
+    }, {
+      "pagePath": "pages/scan/scan",
+      "text": "绑定卡片",
+      "iconPath": "static/tab_icons/scan.png",
+      "selectedIconPath": "static/tab_icons/scan-active.png"
+    }, {
+      "pagePath": "pages/order/order",
+      "text": "订单",
+      "iconPath": "static/tab_icons/order.png",
+      "selectedIconPath": "static/tab_icons/order-active.png"
+    }, {
+      "pagePath": "pages/my/my",
+      "text": "我的",
+      "iconPath": "static/tab_icons/my.png",
+      "selectedIconPath": "static/tab_icons/my-active.png"
+    }]
+  }
+}
