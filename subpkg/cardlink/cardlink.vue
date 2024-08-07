@@ -3,7 +3,7 @@
     <!-- 卡片信息 -->
     <uni-section title="卡片信息" type="line">
       <view class="info-image">
-        <image src="../../static/itemPics/mango.jpg"></image>
+        <!-- <image src="../../static/itemPics/mango.jpg"></image> -->
       </view>
       <view class="info-item">
         <view class="info-item-title">卡片名称</view>

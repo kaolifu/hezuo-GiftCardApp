@@ -21,6 +21,13 @@
     {
       "navigationBarTitleText" : "绑定卡片"
     }
+  },
+  {
+    "path" : "subpkg/goods-detail/goods-detail",
+    "style" : 
+    {
+      "navigationBarTitleText" : ""
+    }
   }],
   "globalStyle": {
     "navigationBarTextStyle": "black",
