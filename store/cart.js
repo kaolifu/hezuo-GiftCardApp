@@ -33,6 +33,11 @@ export default {
     }
   },
   getters: {
+    total(state) {
+      return state.cart.reduce((total, item) => {
+        return total += item.goods_count
+      }, 0)
+    },
     goodsAmount(state) {
       return state.cart.reduce((total, item) => total += item.goods_price * item.goods_count, 0).toFixed(2)
     }

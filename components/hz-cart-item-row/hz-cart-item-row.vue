@@ -11,7 +11,7 @@
       <view>×</view>
       <view class="price">{{ goods.goods_price }}元/份</view>
       <view>=</view>
-      <view class="amount">{{ goods.goods_count * goods.goods_price }}元</view>
+      <view class="amount">{{ amount }}元</view>
     </view>
     <uni-icons type="closeempty" size="16" @tap="removeGoodsById(goods.goods_id)"></uni-icons>
   </view>
@@ -28,6 +28,11 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    amount() {
+      return (this.goods.goods_count * this.goods.goods_price).toFixed(2);
+    }
   },
   methods: {
     ...mapMutations('m_cart', ['updateGoodsCount', 'removeGoodsById']),

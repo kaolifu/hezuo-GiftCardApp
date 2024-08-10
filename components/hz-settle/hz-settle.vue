@@ -16,12 +16,23 @@ export default {
   name: 'hz-settle',
   computed: {
     ...mapState('m_cart', ['cart']),
-    ...mapGetters('m_cart', ['goodsAmount'])
+    ...mapGetters('m_cart', ['goodsAmount', 'total'])
+  },
+  watch: {
+    total: {
+      handler(newVal) {
+        const findResult = this.options.find((x) => x.text === '购物车');
+        if (findResult) {
+          findResult.info = newVal;
+        }
+      },
+      immediate: true
+    }
   },
   data() {
     return {
-      options: [{ icon: 'cart', text: '购物车', info: 2 }],
-      buttonGroup: [{ text: '生成订单', backgroundColor: 'darkseagreen', color: '#fff' }]
+      options: [{ icon: 'cart', text: '购物车', info: this.total }],
+      buttonGroup: [{ text: '生成礼包', backgroundColor: 'darkseagreen', color: '#fff' }]
     };
   },
   methods: {
@@ -31,7 +42,7 @@ export default {
     ...mapMutations('m_cart', ['clearCart']),
     ...mapMutations('m_order', ['addToOrders']),
 
-    async createOrder() {
+    createOrder() {
       if (this.cart.length === 0) {
         uni.showToast({
           title: '您还没有添加购物车',
@@ -43,8 +54,15 @@ export default {
         orderId: Date.now(),
         createAt: new Date(),
         content: this.cart,
-        amount: this.goodsAmount
+        cartAmount: this.goodsAmount,
+        orderCount: 1
       };
+      this.addToOrders(order);
+      this.clearCart();
+      uni.switchTab({
+        url: '/pages/order/order'
+      });
+      uni.$http.post('/order/add', { order:order });
     }
   }
 };

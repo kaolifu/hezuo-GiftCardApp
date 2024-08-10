@@ -12,6 +12,13 @@ export default {
       state.orders = state.orders.filter(x => x.orderId !== orderId)
       this.commit('m_order/saveToStorage')
     },
+    updateOrderCount(state, order) {
+      const findResult = state.orders.find(x => x.orderId === order.orderId)
+      if (findResult) {
+        findResult.orderCount = order.orderCount
+        this.commit('m_order/saveToStorage')
+      }
+    },
     saveToStorage(state) {
       uni.setStorageSync('orders', JSON.stringify(state.orders))
     }

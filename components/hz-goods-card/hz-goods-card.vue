@@ -46,7 +46,7 @@ export default {
       const goods = {
         goods_id: item.id,
         goods_name: item.name,
-        goods_price: item.price,
+        goods_price: item.price.toFixed(2),
         goods_count: 1,
         goods_date: item.date
       };
