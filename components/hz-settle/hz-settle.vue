@@ -62,7 +62,7 @@ export default {
       uni.switchTab({
         url: '/pages/order/order'
       });
-      uni.$http.post('/order/add', { order:order });
+      uni.$http.post('/order/add', order );
     }
   }
 };
