@@ -1,8 +1,6 @@
 <template>
   <view class="month-banner">
-    <image v-show="season === 's02'" :src="banners[0]" mode="widthFix"></image>
-    <image v-show="season === 's03'" :src="banners[1]" mode="widthFix"></image>
-    <image v-show="season === 's04'" :src="banners[2]" mode="widthFix"></image>
+    <image :src="image" mode="widthFix"></image>
   </view>
 </template>
 
@@ -17,7 +15,8 @@ export default {
   },
   data() {
     return {
-      banners: []
+      banners: [],
+      image: null
     };
   },
   computed: {
@@ -42,7 +41,12 @@ export default {
   methods: {
     async getBanners() {
       const { data: res } = await uni.$http.get('/farm/get-banner');
-      this.banners = [...new Set(res.data.map((item) => item.banner))];
+      this.banners = res.data;
+      this.getPic();
+    },
+    getPic() {
+      const findResult = this.banners.find((x) => x.month === this.season);
+      this.image = findResult.pic;
     }
   },
   created() {

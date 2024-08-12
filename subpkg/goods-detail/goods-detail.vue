@@ -1,6 +1,6 @@
 <template>
   <view class="detail-pic" :style="{ paddingBottom: safeAreaBottom + 50 + 'px' }">
-    <image :src="goods_detail" mode="widthFix"></image>
+    <image :src="'https://hzimg.hzmate.cn/' + goods.detail_pic" mode="widthFix"></image>
   </view>
   <hz-settle-2btns :item="goods"></hz-settle-2btns>
 </template>
@@ -9,7 +9,6 @@
 export default {
   data() {
     return {
-      goods_detail: null,
       goods: {},
       safeAreaBottom: 0
     };
@@ -18,7 +17,6 @@ export default {
     async getGoodsDetail(goods_id) {
       const { data: res } = await uni.$http.get('/farm/get-farm', { goods_id: goods_id });
       this.goods = res.data[0];
-      this.goods_detail = this.goods.detail_pic;
     }
   },
   onLoad(options) {

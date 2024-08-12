@@ -23,5 +23,9 @@ export default {
       uni.setStorageSync('orders', JSON.stringify(state.orders))
     }
   },
-  getters: {}
+  getters: {
+    total(state) {
+      return state.orders.length
+    }
+  }
 }

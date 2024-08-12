@@ -4,13 +4,10 @@
     <view class="item-text">
       <view class="count">
         <uni-icons type="left" size="16" color="darkseagreen" @tap="decreaseCount(goods)" />
-        <input type="number" :value="goods.goods_count" />
+        <input type="number" :value="goods.goods_count" class="inputCount" />
         <uni-icons type="right" size="16" color="darkseagreen" @tap="increaseCount(goods)" />
-        <text>份</text>
       </view>
-      <view>×</view>
-      <view class="price">{{ goods.goods_price }}元/份</view>
-      <view>=</view>
+      <view class="price">{{ goods.goods_price }}元</view>
       <view class="amount">{{ amount }}元</view>
     </view>
     <uni-icons type="closeempty" size="16" @tap="removeGoodsById(goods.goods_id)"></uni-icons>
@@ -56,26 +53,27 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: 12px;
   .item-text {
     flex: 1;
-    display: flex;
-    gap: 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    justify-content: start;
+    text-align: center;
+    .count {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   .name {
-    width: 60px;
+    width: 96px;
     text-align: center;
   }
-  .count {
-    display: flex;
-    align-items: center;
-  }
-  input {
+  .inputCount {
     border: 1px solid darkseagreen;
     display: inline-block;
-    width: 24px;
+    width: 18px;
     text-align: right;
     border-radius: 4px;
     padding: 0 4px;

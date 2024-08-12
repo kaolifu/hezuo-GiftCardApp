@@ -12,7 +12,7 @@
       <hz-order :order="order"></hz-order>
     </block>
     <view class="button">
-      <button type="primary" @tap="gotoFarm">加购一份</button>
+      <button type="primary" @tap="gotoFarm" class="onemoreBtn">加购一份</button>
     </view>
     <hz-visiting-card></hz-visiting-card>
   </view>
@@ -20,13 +20,15 @@
 
 <script>
 import { mapState } from 'vuex';
+import badgeMix from '@/mixins/tabbar-badge.js';
 export default {
+  mixins: [badgeMix],
   computed: {
     ...mapState('m_order', ['orders'])
   },
   data() {
     return {};
-  },
+  }, 
   methods: {
     gotoFarm() {
       uni.switchTab({
@@ -52,7 +54,10 @@ export default {
   }
 }
 .button {
-  width: 80%;
+  width: calc(100% - 16px);
   margin: 8px auto 8px;
+  .onemoreBtn{
+    font-size: 14px;
+  }
 }
 </style>

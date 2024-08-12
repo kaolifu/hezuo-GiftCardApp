@@ -1,15 +1,16 @@
 <template>
   <view class="goods-card" @tap="gotoDetail(goods.id)">
-    <image :src="goods.icon" mode="widthFix"></image>
+    <image :src="'https://hzimg.hzmate.cn/' + goods.icon" mode="widthFix"></image>
     <view class="goods-info">
       <view class="info-title">
-        <view class="title-name">{{ goods.name }}</view>
-        <view class="title-price">
-          {{ goods.price }}
-          <text>{{ goods.standard }}</text>
-        </view>
+        <view class="title-name">{{ goods.title }}</view>
+        <view class="title-price">{{ (goods.sellPrice / 100).toFixed(2) }} 元</view>
       </view>
-      <view class="info-desc">{{ goods.desc }}</view>
+      <view class="info-desc">
+        <view>{{ goods.producer }}</view>
+        <view>{{ goods.note }}</view>
+        <view>{{ goods.netVol }}</view>
+      </view>
       <view class="btns">
         <uni-icons type="minus-filled" size="24" color="darkseagreen" v-show="count > 0" @tap.stop="decreaseCount(goods)"></uni-icons>
         <input type="number" :value="count" v-show="count > 0" @tap.stop />
@@ -45,8 +46,8 @@ export default {
     addCart(item) {
       const goods = {
         goods_id: item.id,
-        goods_name: item.name,
-        goods_price: item.price.toFixed(2),
+        goods_name: item.title,
+        goods_price: (item.sellPrice / 100).toFixed(2),
         goods_count: 1,
         goods_date: item.date
       };
@@ -88,33 +89,35 @@ view {
   gap: 8px;
   align-items: center;
   margin-bottom: 8px;
-  // border: 1px solid #ccc;
   border-bottom: 1px solid #ddd;
   image {
     min-width: 80px;
     width: 80px;
-    height: 80px;
   }
   .goods-info {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 4px;
     .info-title {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
       .title-name {
+        width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .title-price {
-        text {
-          font-size: 12px;
-        }
+        width: 72px;
+        text-align: right;
       }
     }
     .info-desc {
-      font-size: 10px;
-      color: #ccc;
-      height: 28px;
-      overflow: hidden;
+      font-size: 12px;
+      color: #999;
     }
     .btns {
       width: 100%;

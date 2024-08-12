@@ -2,8 +2,15 @@
   <uni-popup ref="popup" type="bottom" background-color="#fff" :safeArea="false">
     <view class="popup-content">
       <view v-if="cart.length === 0" class="empty-cart">购物车里空空如也</view>
-      <view v-else v-for="(item, i) in cart" :key="i">
-        <hz-cart-item-row :goods="item" />
+      <view v-else>
+        <view class="cart-title">
+          <view>商品名</view>
+          <view>份数</view>
+          <view>单价</view>
+          <view>小计</view>
+          <view></view>
+        </view>
+        <hz-cart-item-row v-for="(item, i) in cart" :key="i" :goods="item" />
       </view>
     </view>
   </uni-popup>
@@ -62,7 +69,7 @@ export default {
       uni.switchTab({
         url: '/pages/order/order'
       });
-      uni.$http.post('/order/add', order );
+      uni.$http.post('/order/add', order);
     }
   }
 };
@@ -84,5 +91,13 @@ export default {
 .empty-cart {
   font-size: 14px;
   padding: 8px 16px;
+}
+.cart-title {
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 96px 1fr 1fr 1fr 12px;
+  font-size: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
 }
 </style>

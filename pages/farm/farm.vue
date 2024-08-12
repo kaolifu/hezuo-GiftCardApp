@@ -13,32 +13,51 @@
       </block>
     </scroll-view>
   </view>
-  
+
   <hz-settle></hz-settle>
 </template>
 
 <script>
 import moment from 'moment';
 moment.locale('zh-cn');
+import badgeMix from '@/mixins/tabbar-badge.js';
 
 export default {
+  mixins: [badgeMix],
+
   data() {
     return {
       wh: 0,
       active: '2024-08',
       items: [],
-      months: [],   
+      months: []
     };
   },
   methods: {
     async getFarm() {
       const { data: res } = await uni.$http.get('/farm');
       this.items = res.data;
-      this.items.forEach((item) => {
-        item.date = moment(item.date).format('YYYY-MM');
-      });
-      this.months = [...new Set(this.items.map((item) => item.date))];
+
+      this.items = this.items.map((item) => ({
+        ...item,
+        note: item.note ? item.note.replace(/\\n/g, '：') : ''
+      }));
+
+      this.getMonths();
+
       this.active = this.months[0];
+    },
+    getMonths() {
+      this.months = [...new Set(this.items.map((item) => item.date))];
+      // 按时间顺序排序
+      this.months.sort((a, b) => {
+        // 将 YYYY-MM 字符串转换为 Date 对象
+        const dateA = new Date(`${a}-01`);
+        const dateB = new Date(`${b}-01`);
+
+        // 比较两个 Date 对象
+        return dateA - dateB;
+      });
     },
     activeChange(month) {
       this.active = month;
@@ -66,5 +85,4 @@ export default {
 .container {
   display: flex;
 }
-
 </style>

@@ -1,48 +1,17 @@
 <template>
-  <view v-for="(item, i) in items" :key="i">
-    <view>{{ item.name }}</view>
-    <view class="count">{{ getCount(item.id) }}</view>
-  </view>
+  <hz-login></hz-login>
 </template>
 
 <script>
+import badgeMix from '@/mixins/tabbar-badge.js';
+
 export default {
+  mixins: [badgeMix],
+
   data() {
-    return {
-      items: [
-        {
-          id: '01',
-          name: 'aaa'
-        },
-        {
-          id: '02',
-          name: 'bbb'
-        },
-        {
-          id: '03',
-          name: 'ccc'
-        }
-      ],
-      cart: [
-        {
-          id: '01',
-          name: 'aaa',
-          count: 1
-        },
-        {
-          id: '02',
-          name: 'bbb',
-          count: 3
-        }
-      ]
-    };
+    return {};
   },
-  methods: {
-    getCount(itemId) {
-      const cartItem = this.cart.find((cartItem) => cartItem.id === itemId);
-      return cartItem ? cartItem.count : 0;
-    }
-  }
+  methods: {}
 };
 </script>
 

@@ -49,7 +49,7 @@ export default {
   background-color: #fff;
   padding: 4px 8px;
   margin: 0 8px 8px 8px;
-  font-size: 14px;
+  font-size: 12px;
   .card-title {
     color: darkseagreen;
     text-align: center;

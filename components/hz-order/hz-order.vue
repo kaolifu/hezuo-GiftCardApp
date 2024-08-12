@@ -9,11 +9,11 @@
       <uni-icons type="closeempty" size="16" @tap="deleteOrder(order.orderId)"></uni-icons>
     </view>
     <!-- 订单内容 -->
-    <view>
+    <view class="order-content">
       <!-- 订单抬头 -->
       <view class="order-content-row">
         <view>上市日期</view>
-        <view>内容</view>
+        <view>商品名</view>
         <view>份数</view>
         <view>单价</view>
         <view>小计</view>
@@ -41,6 +41,9 @@
           <uni-icons type="right" size="16" @tap="increaseCount(order)"></uni-icons>
         </view>
       </view>
+      <view class="submitBtn-row">
+        <button type="primary" size="mini" class="submitBtn" style="margin-right: 0" v-show="isOrderChanged" @tap="updateOrder">提交订单</button>
+      </view>
     </view>
     <view class="order-total-amount">
       <view class="order-total-amount-row">
@@ -64,7 +67,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      isOrderChanged: false
+    };
   },
   methods: {
     ...mapMutations('m_order', ['removeOrderById', 'updateOrderCount']),
@@ -85,14 +90,25 @@ export default {
       });
     },
     increaseCount(order) {
+      this.isOrderChanged = true;
       order.orderCount += 1;
       this.updateOrderCount(order);
     },
     decreaseCount(order) {
       if (order.orderCount > 1) {
+        this.isOrderChanged = true;
         order.orderCount -= 1;
         this.updateOrderCount(order);
       }
+    },
+    updateOrder() {
+      this.isOrderChanged = false;
+      /**
+       * 提交订单
+       *
+       *
+       *
+       */
     }
   },
   computed: {
@@ -113,7 +129,7 @@ export default {
   background-color: #fff;
   padding: 4px 8px;
   margin: 0 8px 8px 8px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 20px;
   .order-title {
     display: flex;
@@ -123,10 +139,16 @@ export default {
     margin-bottom: 8px;
     padding-bottom: 8px;
   }
+  .order-content{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
   .order-content-row {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
     text-align: center;
+    align-items: center;
   }
   .order-amount {
     margin-top: 8px;
@@ -150,6 +172,15 @@ export default {
           width: 20px;
           text-align: center;
         }
+      }
+    }
+    .submitBtn-row {
+      display: flex;
+      justify-content: flex-end;
+      .submitBtn {
+        margin-top: 8px;
+        margin-right: 4px;
+        font-size: 12px;
       }
     }
   }
